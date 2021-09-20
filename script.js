@@ -40,6 +40,112 @@ function updateRenders() {
     $(".configurator-viewer .render-plate").attr("src", `https://raw.githubusercontent.com/ShadowProgr/kyuu-configurator/main/assets/plate/${plate}.png?raw=true`);
 };
 
+function updatePrice() {
+    if (!$("input[type='radio'][name='grp-layout']:checked").length
+            || !$("input[type='radio'][name='grp-case-color']:checked").length
+            || !$("input[type='radio'][name='grp-badge-color']:checked").length
+            || !$("input[type='radio'][name='grp-weight-style']:checked").length
+            || !$("input[type='radio'][name='grp-weight-color']:checked").length
+            || !$("input[type='radio'][name='grp-plate-color']:checked").length)
+        return;
+    
+    const weightStyle = $("input[type='radio'][name='grp-weight-style']:checked").attr("id");
+    if (weightStyle.includes("hybrid")
+            && !$("input[type='radio'][name='grp-subweight-color']:checked").length)
+        return;
+
+    let price = 0;
+    
+    // Case
+    const layout = $("input[type='radio'][name='grp-layout']:checked").attr("id").replace("case-", "");
+    const caseColor = $("input[type='radio'][name='grp-case-color']:checked").attr("id").replace("case-", "");
+    let caseFinish = "";
+    if (layout.includes("crane") || layout.includes("flower") || caseColor.includes("alu")) {
+        if (caseColor.includes("alu-e")) {
+            caseFinish = "alu-ecoat";
+        } else {
+            caseFinish = "alu-anode";
+        }
+    } else if (caseColor.includes("pc")) {
+        caseFinish = "pc";
+    } else {
+        caseFinish = caseColor;
+    }
+    price += parseInt(prices[`${layout}-${caseFinish}`]);
+
+    // Badge
+    const badge = $("input[type='radio'][name='grp-badge-color']:checked").attr("id").replace("badge-", "");
+    let badgeFinish = "";
+    if (badge.includes("crane") || badge.includes("flower")) {
+        badgeFinish = "special";
+    } else if (badge.includes("alu")) {
+        if (badge.includes("alu-e")) {
+            badgeFinish = "alu-ecoat";
+        } else {
+            badgeFinish = "alu-anode";
+        }
+    } else if (badge.includes("pc")) {
+        badgeFinish = "pc";
+    } else {
+        badgeFinish = badge;
+    }
+    price += parseInt(prices[`badge-${badgeFinish}`]);
+
+    // Weight
+    const weight = $("input[type='radio'][name='grp-weight-color']:checked").attr("id").replace("weight-", "");
+    let weightFinish = "";
+    if (weight.includes("alu")) {
+        if (weight.includes("alu-e")) {
+            weightFinish = "alu-ecoat";
+        } else {
+            weightFinish = "alu-anode";
+        }
+    } else if (weight.includes("pc")) {
+        weightFinish = "pc";
+    } else {
+        weightFinish = weight;
+    }
+    price += parseInt(prices[`${weightStyle}-${weightFinish}`]);
+
+    // Subweight
+    if (weightStyle.includes("hybrid")
+            && !$("input[type='radio'][name='grp-subweight-color']:checked").length) {
+        const subweight = $("input[type='radio'][name='grp-subweight-color']:checked").attr("id").replace("subweight-", "");
+
+        let subweightFinish = "";
+        if (subweight.includes("alu")) {
+            if (subweight.includes("alu-e")) {
+                subweightFinish = "alu-ecoat";
+            } else {
+                subweightFinish = "alu-anode";
+            }
+        } else {
+            subweightFinish = "pc";
+        }
+        price += parseInt(prices[`subweight-${subweightFinish}`]);
+    }
+
+    // Plate
+    const plate = $("input[type='radio'][name='grp-plate-color']:checked").attr("id").replace("plate-", "");
+    let plateFinish = "";
+    if (plate.includes("alu")) {
+        if (plate.includes("alu-e")) {
+            plateFinish = "alu-ecoat";
+        } else {
+            plateFinish = "alu-anode";
+        }
+    } else if (plate.includes("pc")) {
+        plateFinish = "pc";
+    } else if (plate.includes("pom")) {
+        plateFinish = "pom";
+    } else {
+        plateFinish = plate;
+    }
+    price += parseInt(prices[`plate-${plateFinish}`]);
+
+    $(".price-number").text(price.toLocaleString(undefined));
+}
+
 $(document).ready(function () {
     $("input[name='grp-layout']").change(function () {
         const id = $("input[type='radio'][name='grp-layout']:checked").attr("id");
@@ -57,6 +163,7 @@ $(document).ready(function () {
             }
         }
         updateRenders();
+        updatePrice();
     });
 
     $("input[name='grp-case-material']").change(function () {
@@ -73,12 +180,14 @@ $(document).ready(function () {
             $(".grp-case-color .case-copper-color").fadeIn("fast");
         }
         updateRenders();
+        updatePrice();
     });
 
     $("input[name='grp-case-color']").change(function () {
         const id = $("input[type='radio'][name='grp-case-color']:checked").attr("id");
 
         updateRenders();
+        updatePrice();
     });
     
     $("input[name='grp-badge-material']").change(function () {
@@ -101,12 +210,14 @@ $(document).ready(function () {
             $(".grp-badge-color .badge-ss-color").fadeIn("fast");
         }
         updateRenders();
+        updatePrice();
     });
 
     $("input[name='grp-badge-color']").change(function () {
         const id = $("input[type='radio'][name='grp-badge-color']:checked").attr("id");
 
         updateRenders();
+        updatePrice();
     });
 
     $("input[name='grp-weight-style']").change(function () {
@@ -124,6 +235,7 @@ $(document).ready(function () {
             }
         }
         updateRenders();
+        updatePrice();
     });
 
     $("input[name='grp-weight-material']").change(function () {
@@ -150,12 +262,14 @@ $(document).ready(function () {
             $(".grp-weight-color .weight-ss-color").fadeIn("fast");
         }
         updateRenders();
+        updatePrice();
     });
 
     $("input[name='grp-weight-color']").change(function () {
         const id = $("input[type='radio'][name='grp-weight-color']:checked").attr("id");
 
         updateRenders();
+        updatePrice();
     });
 
     $("input[name='grp-subweight-material']").change(function () {
@@ -169,12 +283,14 @@ $(document).ready(function () {
             $(".grp-subweight-color .subweight-pc-color").fadeIn("fast");
         }
         updateRenders();
+        updatePrice();
     });
 
     $("input[name='grp-subweight-color']").change(function () {
         const id = $("input[type='radio'][name='grp-subweight-color']:checked").attr("id");
 
         updateRenders();
+        updatePrice();
     });
 
     $("input[name='grp-plate-material']").change(function () {
@@ -197,15 +313,15 @@ $(document).ready(function () {
             $(".grp-plate-color .plate-pom-color").fadeIn("fast");
         }
         updateRenders();
+        updatePrice();
     });
 
     $("input[name='grp-plate-color']").change(function () {
         const id = $("input[type='radio'][name='grp-plate-color']:checked").attr("id");
 
         updateRenders();
+        updatePrice();
     });
-
-    $(".price").hide();
 
     $("input[name='grp-layout'][id='wkl']").prop("checked", true).change();
     $("input[name='grp-case-material'][id='case-alu']").prop("checked", true).change();
