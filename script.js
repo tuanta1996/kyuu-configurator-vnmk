@@ -55,6 +55,7 @@ function updatePrice() {
         return;
 
     let price = 0;
+    let temp = "";
     
     // Case
     const layout = $("input[type='radio'][name='grp-layout']:checked").attr("id").replace("case-", "");
@@ -72,6 +73,7 @@ function updatePrice() {
         caseFinish = caseColor;
     }
     price += parseInt(prices[`${layout}-${caseFinish}`]);
+    temp += parseInt(prices[`${layout}-${caseFinish}`]) + " ";
 
     // Badge
     const badge = $("input[type='radio'][name='grp-badge-color']:checked").attr("id").replace("badge-", "");
@@ -90,6 +92,7 @@ function updatePrice() {
         badgeFinish = badge;
     }
     price += parseInt(prices[`badge-${badgeFinish}`]);
+    temp += parseInt(prices[`badge-${badgeFinish}`]) + " ";
 
     // Weight
     const weight = $("input[type='radio'][name='grp-weight-color']:checked").attr("id").replace("weight-", "");
@@ -106,10 +109,11 @@ function updatePrice() {
         weightFinish = weight;
     }
     price += parseInt(prices[`${weightStyle}-${weightFinish}`]);
+    temp += parseInt(prices[`${weightStyle}-${weightFinish}`]) + " ";
 
     // Subweight
     if (weightStyle.includes("hybrid")
-            && !$("input[type='radio'][name='grp-subweight-color']:checked").length) {
+            && $("input[type='radio'][name='grp-subweight-color']:checked").length) {
         const subweight = $("input[type='radio'][name='grp-subweight-color']:checked").attr("id").replace("subweight-", "");
 
         let subweightFinish = "";
@@ -123,6 +127,7 @@ function updatePrice() {
             subweightFinish = "pc";
         }
         price += parseInt(prices[`subweight-${subweightFinish}`]);
+        temp  += parseInt(prices[`subweight-${subweightFinish}`]) + " ";
     }
 
     // Plate
@@ -142,8 +147,10 @@ function updatePrice() {
         plateFinish = plate;
     }
     price += parseInt(prices[`plate-${plateFinish}`]);
+    temp += parseInt(prices[`plate-${plateFinish}`]) + " ";
 
     $(".price-number").text(price.toLocaleString(undefined));
+    // $(".price-number").text(temp);
 }
 
 $(document).ready(function () {
