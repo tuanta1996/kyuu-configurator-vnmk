@@ -11,6 +11,7 @@
     <script type="text/javascript" src="script.js"></script>
   </head>
   <body>
+    <!-- Other form -->
     <div class="configurator container-fluid">
       <div class="row">
         <div class="col-12 col-md-5 configurator-options">
@@ -926,15 +927,47 @@
               </a>
             </div>
           </div>
-          <div class="align-items-center d-flex font-1-5 justify-content-center h-25">
+          <div class="align-items-center d-flex font-1-5 justify-content-center h-25 flex-column">
             <div class="price text-center">
               <span class="price-text text-uppercase font-weight-bold">Giá: </span>
               <span class="price-number font-italic">100.000.000</span>
               <span class="price-currency font-italic"> ₫</span>
             </div>
+            <button class="btn open-form">Đặt mua</button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Pop-up form -->
+    <div class="form-popup">
+			<div class="container form-wrapper">
+				<button class="close-form">Close</button>
+				<form id="my-form" novalidate="novalidate">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h1 class="form-title">[GB] Reset's Kyuu R2 - VNMK</h1>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="name">Họ và Tên</label>
+							<input type="text" class="form-control" id="name" name="name" required="">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="phone">SĐT</label>
+							<input type="text" class="form-control" id="phone" name="phone" required="">
+						</div>
+					</div>
+          <div class="row">
+            <div class="form-group col-md-12">
+							<label for="fb">Link Facebook</label>
+							<input type="text" class="form-control" id="fb" name="fb" required="">
+						</div>
+          </div>
+					<button type="submit" class="btn send-form">Send</button>
+				</form>
+			</div>
+		</div>
   </body>
 </html>

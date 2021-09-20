@@ -128,3 +128,132 @@ img {
 .carousel-indicators {
   filter: invert(100%);
 }
+
+.open-form,
+.open-form:focus {
+    margin-top: 10px;
+    cursor: pointer;
+    color: white!important;
+    padding: 10px 25px!important;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15)!important;
+    border: 2px solid black!important;
+    background-color: black!important;
+    text-transform: uppercase;
+    font-size: 1rem;
+    transition: .3s;
+}
+
+.open-form:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.35)!important;
+}
+
+.form-popup {
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, .5);
+    transition: .5s;
+}
+
+.form-popup .form-wrapper {
+    max-width: 700px;
+    background: white;
+    padding: 50px;
+    position: absolute;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.35);
+    z-index: 0!important;
+    outline-offset: -15px!important;
+    outline: 3px solid #0f0f0f!important;
+    outline-style: double!important;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-title {
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.send-form {
+    cursor: pointer;
+    padding: 11px 32px!important;
+    border: 3px solid #0f0f0f!important;
+    background-color: transparent!important;
+    color: rgba(15,15,15,1)!important;
+    border: 2px solid #83b566;
+    color: #ffffff;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    transition: .3s;
+    margin-top: 8px;
+    font-weight: 800!important;
+    float: right;
+}
+
+.send-form:hover {
+  background-color: rgba(15,15,15,1)!important;
+  color: white!important;
+}
+
+.close-form {
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  color: transparent;
+  cursor: pointer;
+  font-size: 9px;
+  right: 15px;
+  top: 15px;
+  letter-spacing: 1.5px;
+  line-height: 40px;
+  outline: none;
+  overflow: hidden;
+  padding: 5px 0;
+  position: absolute;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in;
+  width: 50px;
+  z-index: 999;
+}
+
+.close-form::before,
+.close-form::after {
+  background-color: black;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 0;
+  position: absolute;
+  transform-origin: center center;
+  transition: all 0.2s ease-in;
+  width: 50px;
+  z-index: -1;
+}
+
+.close-form::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.close-form::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+.close-form:hover {
+  color: white;
+}
+
+.close-form:hover::before,
+.close-form:hover::after {
+  height: 50px;
+  transform: rotate(0deg);
+}
+
+
