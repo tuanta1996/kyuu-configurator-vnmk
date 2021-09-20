@@ -5,14 +5,14 @@ function updateRenders() {
         return;
     const layout = $("input[type='radio'][name='grp-layout']:checked").attr("id").replace("case-", "");
     const caseColor = $("input[type='radio'][name='grp-case-color']:checked").attr("id").replace("case-", "");
-    $(".configurator-viewer .render-bottom").attr("src", `https://shadowprogr.github.io/kyuu-configurator/assets/case-bottom/${layout}-${caseColor}.png`);
-    $(".configurator-viewer .render-top").attr("src", `https://shadowprogr.github.io/kyuu-configurator/assets/case-top/${layout}-${caseColor}.png`);
+    $(".configurator-viewer .render-bottom").attr("src", `https://raw.githubusercontent.com/ShadowProgr/kyuu-configurator/main/assets/case-bottom/${layout}-${caseColor}.png`);
+    $(".configurator-viewer .render-top").attr("src", `https://raw.githubusercontent.com/ShadowProgr/kyuu-configurator/main/assets/case-top/${layout}-${caseColor}.png`);
 
     // Badge
     if (!$("input[type='radio'][name='grp-badge-color']:checked").length)
         return;
     const badge = $("input[type='radio'][name='grp-badge-color']:checked").attr("id").replace("badge-", "");
-    $(".configurator-viewer .render-badge").attr("src", `https://shadowprogr.github.io/kyuu-configurator/assets/badge/${badge}.png`);
+    $(".configurator-viewer .render-badge").attr("src", `https://raw.githubusercontent.com/ShadowProgr/kyuu-configurator/main/assets/badge/${badge}.png`);
 
     // Weight
     if (!$("input[type='radio'][name='grp-weight-style']:checked").length
@@ -20,14 +20,14 @@ function updateRenders() {
         return;
     const weightStyle = $("input[type='radio'][name='grp-weight-style']:checked").attr("id");
     const weight = $("input[type='radio'][name='grp-weight-color']:checked").attr("id").replace("weight-", "");
-    $(".configurator-viewer .render-weight").attr("src", `https://shadowprogr.github.io/kyuu-configurator/assets/${weightStyle}/${weight}.png`);
+    $(".configurator-viewer .render-weight").attr("src", `https://raw.githubusercontent.com/ShadowProgr/kyuu-configurator/main/assets/${weightStyle}/${weight}.png`);
 
     // Subweight
     if (!$("input[type='radio'][name='grp-subweight-color']:checked").length)
         return;
     if (weightStyle.includes("hybrid")) {
         const subweight = $("input[type='radio'][name='grp-subweight-color']:checked").attr("id").replace("subweight-", "");
-        $(".configurator-viewer .render-subweight").attr("src", `https://shadowprogr.github.io/kyuu-configurator/assets/subweight/${subweight}.png`);
+        $(".configurator-viewer .render-subweight").attr("src", `https://raw.githubusercontent.com/ShadowProgr/kyuu-configurator/main/assets/subweight/${subweight}.png`);
         $(".configurator-viewer .render-subweight").show();
     } else {
         $(".configurator-viewer .render-subweight").hide();
@@ -37,7 +37,7 @@ function updateRenders() {
     if (!$("input[type='radio'][name='grp-plate-color']:checked").length)
         return;
     const plate = $("input[type='radio'][name='grp-plate-color']:checked").attr("id").replace("plate-", "");
-    $(".configurator-viewer .render-plate").attr("src", `https://shadowprogr.github.io/kyuu-configurator/assets/plate/${plate}.png`);
+    $(".configurator-viewer .render-plate").attr("src", `https://raw.githubusercontent.com/ShadowProgr/kyuu-configurator/main/assets/plate/${plate}.png`);
 };
 
 $(document).ready(function () {
