@@ -58,4 +58,7 @@ const prices = {
     "plate-brass-bpvd": "1700000",
     "plate-copper-sand": "1050000",
     "plate-copper-polish": "950000",
+
+    "pcb-solder": "1100000",
+    "pcb-hotswap": "1250000"
 };

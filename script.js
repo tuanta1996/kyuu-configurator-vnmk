@@ -46,13 +46,17 @@ function updatePrice() {
             || !$("input[type='radio'][name='grp-badge-color']:checked").length
             || !$("input[type='radio'][name='grp-weight-style']:checked").length
             || !$("input[type='radio'][name='grp-weight-color']:checked").length
-            || !$("input[type='radio'][name='grp-plate-color']:checked").length)
+            || !$("input[type='radio'][name='grp-plate-color']:checked").length) {
+        $(".price-number").text("N/A");
         return;
+    }
     
     const weightStyle = $("input[type='radio'][name='grp-weight-style']:checked").attr("id");
     if (weightStyle.includes("hybrid")
-            && !$("input[type='radio'][name='grp-subweight-color']:checked").length)
+            && !$("input[type='radio'][name='grp-subweight-color']:checked").length) {
+        $(".price-number").text("N/A");
         return;
+    }
 
     let price = 0;
     let temp = "";
@@ -149,6 +153,12 @@ function updatePrice() {
     price += parseInt(prices[`plate-${plateFinish}`]);
     temp += parseInt(prices[`plate-${plateFinish}`]) + " ";
 
+    // PCB
+    const pcb = $("input[type='radio'][name='grp-pcb']:checked").attr("id");
+    
+    price += parseInt(prices[`${pcb}`]);
+    temp += parseInt(prices[`${pcb}`]) + " ";
+
     $(".price-number").text(price.toLocaleString(undefined));
     // $(".price-number").text(temp);
 }
@@ -191,8 +201,6 @@ $(document).ready(function () {
     });
 
     $("input[name='grp-case-color']").change(function () {
-        const id = $("input[type='radio'][name='grp-case-color']:checked").attr("id");
-
         updateRenders();
         updatePrice();
     });
@@ -221,8 +229,6 @@ $(document).ready(function () {
     });
 
     $("input[name='grp-badge-color']").change(function () {
-        const id = $("input[type='radio'][name='grp-badge-color']:checked").attr("id");
-
         updateRenders();
         updatePrice();
     });
@@ -273,8 +279,6 @@ $(document).ready(function () {
     });
 
     $("input[name='grp-weight-color']").change(function () {
-        const id = $("input[type='radio'][name='grp-weight-color']:checked").attr("id");
-
         updateRenders();
         updatePrice();
     });
@@ -294,8 +298,6 @@ $(document).ready(function () {
     });
 
     $("input[name='grp-subweight-color']").change(function () {
-        const id = $("input[type='radio'][name='grp-subweight-color']:checked").attr("id");
-
         updateRenders();
         updatePrice();
     });
@@ -324,8 +326,11 @@ $(document).ready(function () {
     });
 
     $("input[name='grp-plate-color']").change(function () {
-        const id = $("input[type='radio'][name='grp-plate-color']:checked").attr("id");
+        updateRenders();
+        updatePrice();
+    });
 
+    $("input[name='grp-pcb']").change(function () {
         updateRenders();
         updatePrice();
     });
@@ -342,4 +347,5 @@ $(document).ready(function () {
     $("input[name='grp-subweight-color'][id='subweight-alu-ewhite']").prop("checked", true).change();
     $("input[name='grp-plate-material'][id='plate-pom']").prop("checked", true).change();
     $("input[name='grp-plate-color'][id='plate-pom-black']").prop("checked", true).change();
+    $("input[name='grp-pcb'][id='pcb-solder']").prop("checked", true).change();
 });
